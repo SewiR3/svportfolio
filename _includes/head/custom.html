@@ -1,0 +1,35 @@
+<style>
+  .theme-toggle {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    background: var(--background-color);
+    border: 1px solid var(--text-color);
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+    cursor: pointer;
+    z-index: 999;
+    font-size: 0.9rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  }
+  .theme-toggle:hover { opacity: 0.8; }
+</style>
+<script>
+  (function() {
+    const toggle = document.createElement('button');
+    toggle.className = 'theme-toggle';
+    toggle.textContent = '🌙 Dark';
+    document.body.appendChild(toggle);
+
+    const currentSkin = localStorage.getItem('skin') || 'dark';
+    document.documentElement.setAttribute('data-skin', currentSkin);
+    toggle.textContent = currentSkin === 'dark' ? '☀️ Light' : '🌙 Dark';
+
+    toggle.addEventListener('click', function() {
+      const newSkin = document.documentElement.getAttribute('data-skin') === 'dark' ? 'default' : 'dark';
+      document.documentElement.setAttribute('data-skin', newSkin);
+      localStorage.setItem('skin', newSkin);
+      toggle.textContent = newSkin === 'dark' ? '☀️ Light' : '🌙 Dark';
+    });
+  })();
+</script>

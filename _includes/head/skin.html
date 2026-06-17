@@ -1,0 +1,19 @@
+<!-- _includes/head/skin.html -->
+<script>
+  (function() {
+    // Get the default skin from your _config.yml (fallback to 'default')
+    var defaultSkin = '{{ site.minimal_mistakes_skin | default: "default" }}';
+    var savedSkin = localStorage.getItem('skin');
+    var skin = savedSkin || defaultSkin;
+
+    // Create the <link> tag that loads the actual CSS file
+    var link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.id = 'skin-stylesheet';  // Give it an ID so we can swap it later
+    link.href = '{{ "/assets/css/skins/" | relative_url }}' + skin + '.css';
+    document.head.appendChild(link);
+
+    // Store the skin name on the HTML tag for any other CSS hooks
+    document.documentElement.setAttribute('data-skin', skin);
+  })();
+</script>

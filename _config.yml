@@ -1,3 +1,35 @@
-theme: jekyll-theme-minimal
+remote_theme: mmistakes/minimal-mistakes
+# Minimal Mistakes settings
+minimal_mistakes_skin: "default"
+# Plugins (needed for search, sitemap, etc.)
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-paginate
+  - jekyll-include-cache
 title: Severin Vire - Portfolio
 description: First-year Engineering Student
+
+footer: |
+  <button id="theme-toggle-btn" style="position:fixed; bottom:20px; right:20px; padding:10px 20px; border-radius:30px; background:#333; color:white; border:1px solid #555; cursor:pointer; z-index:9999;">
+    🌙 Dark
+  </button>
+  <script>
+    (function() {
+      var btn = document.getElementById('theme-toggle-btn');
+      var link = document.getElementById('skin-stylesheet');
+      var currentSkin = localStorage.getItem('skin') || '{{ site.minimal_mistakes_skin | default: "default" }}';
+      btn.textContent = currentSkin === 'dark' ? '☀️ Light' : '🌙 Dark';
+      btn.addEventListener('click', function() {
+        var oldSkin = document.documentElement.getAttribute('data-skin');
+        var newSkin = (oldSkin === 'dark') ? 'default' : 'dark';
+        localStorage.setItem('skin', newSkin);
+        var currentHref = link.href;
+        var newHref = currentHref.replace(oldSkin, newSkin);
+        link.href = newHref;
+        document.documentElement.setAttribute('data-skin', newSkin);
+        btn.textContent = newSkin === 'dark' ? '☀️ Light' : '🌙 Dark';
+      });
+    })();
+  </script>
