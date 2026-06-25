@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "2026"
-permalink: /projects/2026
+permalink: /svportfolio/projects/2026
 ---
 
 ## 2026 Projects
