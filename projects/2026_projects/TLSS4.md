@@ -1,5 +1,5 @@
 ---
-title: Traffic Light System - Subsystem 4
+title: "Traffic Light System - Subsystem 4"
 date: 2026-06-25
 draft: false
 ---
@@ -36,6 +36,7 @@ draft: false
 9. [Acknowledgement](#12-acknowledgement)
 
 ---
+
 ### 1. Context:
 
 ENG1013's Traffic Light System Project (TLSP) focused on working in a small team to reproduce and simulate a real-world, UK-based traffic light system using the unit's provided electrical kits. The project aimed to address the complex traffic network in the UK while providing a challenging opportunity to teamwork collaboration and conflict resolution. TLSP was completed within 3 months.
@@ -105,7 +106,8 @@ elif distanceUS3 >= overLC:
     board.digital_write(greenTL3, 1)
 ```
 
-*Note that distanceUS3 is the distance measured between the top of the vehicle and the ultrasonic sensor located above it, and overLC after sizing becomes the minimum gap.*
+Note that distanceUS3 is measured between the top of the vehicle and the ultrasonic sensor located above it, and overLC after sizing becomes the minimum gap.
+
 ### 4. Testing:
 
 **Software:**
@@ -123,20 +125,24 @@ elif distanceUS3 >= overLC:
 **Hardware:**
 
 All LEDs in WL2 (GPIO 8) illuminated simultaneously instead of alternating.
+
 ### 5. Challenges:
 
 In WL2 subcircuit, a 556 timer was intended to generate flashing lights in patterns XOXO/OXOX alternately using four red LEDs, which were arranged in two parallel pairs across two separate branches. However, upon power-up, all LEDs illuminated simultaneously at an approximately equal brightness.
 
 **Investigation:**
 
-1. Checked the values of resistors and capacitor connected to the 556 timer:
-  - For $R_A$ = $R_3$ and $R_B$ = $R_4$ + $R_5$, their values were $R_3$ = $R_4$ = $R_5$ = 10 kΩ, and $C_1$ = 10 μF, therefore period = 0.3465 s, which was sufficient to produce visible flashing.
-  - The 556 timer section was reviewed and confirmed that it was correctly connected to the positive and negative rails.
-  - The WL2 section was analysed, and it was identified that both parallel branches had an identical configuration. This was therefore the root cause.
+Checked the values of resistors and capacitor connected to the 556 timer:
 
-<img src="556_timer.png" alt="556 timer">
+- For $R_A$ = $R_3$ and $R_B$ = $R_4$ + $R_5$, their values were $R_3$ = $R_4$ = $R_5$ = 10 kΩ, and $C_1$ = 10 μF, therefore period = 0.3465 s, which was sufficient to produce visible flashing.
+- The 556 timer section was reviewed and confirmed that it was correctly connected to the positive and negative rails.
+- The WL2 section was analysed, and it was identified that both parallel branches had an identical configuration. This was therefore the root cause.
+ 
+<figure>
+  <img src="{{ '/assets/images/556_timer.png' | relative_url }}" alt="The configuration of the 556 timer ($U_3$) with resistors $R_3$, $R_4$, $R_5$ and capacitor $C_1$." style="width:100%; max-width:600px;">
+  <figcaption>The configuration of the 556 timer ($U_3$) with resistors $R_3$, $R_4$, $R_5$ and capacitor $C_1$.</figcaption>
+</figure>
 
-<p style="font-size:0.9em; color:#4d4d4d; font-style:italic; text-align:center;">The configuration of the 556 timer ($U_3$) with resistors $R_3$, $R_4$, $R_5$ and capacitor $C_1$.</p>
 **Root Cause:**  
 
 Each branch of WL2 consisted of two identically configured "LED + resistor" strings connected in parallel. Each red LED was labelled with D- and each resistor (330 Ω) was labelled with R-.
@@ -149,13 +155,15 @@ During charging of the capacitor ($C_1$), the lower comparator (inside Timer B o
 
 Since both branches shared the same nodes at both ends (between Output pin and GND), all the LEDs illuminated simultaneously.
 
-<img src="" alt="555 timer">
-
-<p style="font-size:0.9em; color:#4d4d4d; font-style:italic; text-align:center;">Internal block diagram of a 555 timer (Timer A/B of the 556). Reproduced from Horowitz & Hill, *The Art of Electronics*, 3rd ed., 2015, p. 428.</p>
+<figure>
+  <img src="{{ '/assets/images/555_timer_The_Art_of_Electronics.png' | relative_url }}" alt="Internal block diagram of a 555 timer (Timer A/B of the 556). Reproduced from Horowitz & Hill, <em>The Art of Electronics</em>, 3rd ed., 2015, p. 428." style="width:100%; max-width:600px;">
+  <figcaption>Internal block diagram of a 555 timer (Timer A/B of the 556). Reproduced from Horowitz & Hill, <em>The Art of Electronics</em>, 3rd ed., 2015, p. 428.</figcaption>
+</figure>
 
 **Fix #1:**
 
 1. **Swapped the positions of each of the LEDs and their adjacent resistors in branch 2.**
+
 2. **Disconnected branch 2 to GND and reconnected to positive rail (5 V).**
 
 As the voltage in $C_1$ crossed 2/3 of 5 V, discharging started, Q went LOW, signaling the Output Driver to block the path between 5V and Output, and open the path between GND and Output. Current then flowed from the 5 V rail into Branch 2, turning on its LEDs, then continued into the Output pin to ground. Branch 1 was turned off since both sides equaled 0 V; thus, current = 0 A.
@@ -168,9 +176,11 @@ However, since the internal transistor inside the Output Driver still needed a s
 
 This solved the light dimming issue by using the transistor's threshold voltage (~2.0 V) to block the current path; therefore, when the node voltages in both sides were identical (5 V), the voltage difference equaled 0 V, current was 0 A. As a result, the $D_4$ and $D_6$ turned off.
 
-<img src="WL.png" alt="WL2 subcircuit">
+<figure>
+  <img src="{{ '/assets/images/WL2.png' | relative_url }}" alt="Final configuration of the WL2 subcircuit with the NMOS transistor (BS170)." style="width:100%; max-width:600px;">
+  <figcaption>Final configuration of the WL2 subcircuit with the NMOS transistor (BS170).</figcaption>
+</figure>
 
-<p style="font-size:0.9em; color:#4d4d4d; font-style:italic; text-align:center;">Final configuration of the WL2 subcircuit with the NMOS transistor (BS170).</p>
 **Lesson:**
 
 - LEDs only blink alternately when they are configured in such a way that the flow of current is opposite.
@@ -221,7 +231,7 @@ This TLSP greatly inspired me to consider potential future simulations of smart 
 
 **Tools**: [Draw.io](https://draw.io/) for circuit schematics, VSCode for development
 
-**Support**: I would like to acknowledge the valuable contributions of my teammates, teaching assistants, and lecturers in this unit.
+**Support**: My teammates, teaching assistants, and lecturers in this unit.
 
 
 

@@ -11,18 +11,18 @@
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="My Portfolio" />
 <meta property="og:description" content="My Portfolio" />
-<link rel="canonical" href="http://localhost:4000/svportfolio/projects/projects_2026/TLSS4.html" />
-<meta property="og:url" content="http://localhost:4000/svportfolio/projects/projects_2026/TLSS4.html" />
+<link rel="canonical" href="http://localhost:4000/svportfolio/projects/2026_projects/TLSS4.html" />
+<meta property="og:url" content="http://localhost:4000/svportfolio/projects/2026_projects/TLSS4.html" />
 <meta property="og:site_name" content="Severin Vire" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2026-06-25T00:00:00+10:00" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Traffic Light System - Subsystem 4" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-06-25T00:00:00+10:00","datePublished":"2026-06-25T00:00:00+10:00","description":"My Portfolio","headline":"Traffic Light System - Subsystem 4","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/svportfolio/projects/projects_2026/TLSS4.html"},"url":"http://localhost:4000/svportfolio/projects/projects_2026/TLSS4.html"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-06-25T00:00:00+10:00","datePublished":"2026-06-25T00:00:00+10:00","description":"My Portfolio","headline":"Traffic Light System - Subsystem 4","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/svportfolio/projects/2026_projects/TLSS4.html"},"url":"http://localhost:4000/svportfolio/projects/2026_projects/TLSS4.html"}</script>
 <!-- End Jekyll SEO tag -->
 
-    <link rel="stylesheet" href="/svportfolio/assets/css/style.css?v=13db83b18d4c4d085ccb5d138dddf8847e956d44">
+    <link rel="stylesheet" href="/svportfolio/assets/css/style.css?v=9a943a738affe3c3de9454d5b19c811530ab91c3">
     <link rel="stylesheet" href="/svportfolio/assets/css/theme.css">
     <!--[if lt IE 9]>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -56,14 +56,13 @@
         
         <p>My Portfolio</p>
         
-          <p class="view"><a href="https://github.com/severinvire/svportfolio">View the Project on GitHub <small>severinvire/svportfolio</small></a></p>
+          <p class="view"><a href="https://github.com/severinvire/svportfolio">View GitHub <small>severinvire/svportfolio</small></a></p>
         
         
         
       </header>
       <section>
-        
-<div style="margin-bottom: 20px; padding: 10px 0; font-size: 0.9em; border-bottom: 1px solid #ddd;">
+        <div style="margin-bottom: 20px; padding: 10px 0; font-size: 0.9em; border-bottom: 1px solid #ddd;">
   <a href="/svportfolio/">Home</a>
 
   
@@ -72,21 +71,33 @@
       <span style="margin: 0 8px;">›</span>
       
       <a href="/svportfolio/projects">
-        Projects
+        
+        
+          Projects
+        
       </a>
     
   
     
       <span style="margin: 0 8px;">›</span>
       
-      <a href="/svportfolio/projects/projects_2026">
-        Projects_2026
+      <a href="/svportfolio/projects/2026_projects">
+        
+        
+          2026
+        
+          Projects
+        
       </a>
     
   
     
       <span style="margin: 0 8px;">›</span>
-      <span>Traffic light system   subsystem 4</span>
+      <span>
+        
+          Traffic Light System - Subsystem 4
+        
+      </span>
     
   
 </div>
@@ -132,6 +143,7 @@
 </ol>
 
 <hr />
+
 <h3 id="1-context">1. Context:</h3>
 
 <p>ENG1013’s Traffic Light System Project (TLSP) focused on working in a small team to reproduce and simulate a real-world, UK-based traffic light system using the unit’s provided electrical kits. The project aimed to address the complex traffic network in the UK while providing a challenging opportunity to teamwork collaboration and conflict resolution. TLSP was completed within 3 months.</p>
@@ -212,7 +224,8 @@
     <span class="n">board</span><span class="p">.</span><span class="n">digital_write</span><span class="p">(</span><span class="n">greenTL3</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 </code></pre></div></div>
 
-<p><em>Note that distanceUS3 is the distance measured between the top of the vehicle and the ultrasonic sensor located above it, and overLC after sizing becomes the minimum gap.</em></p>
+<p>Note that distanceUS3 is measured between the top of the vehicle and the ultrasonic sensor located above it, and overLC after sizing becomes the minimum gap.</p>
+
 <h3 id="4-testing">4. Testing:</h3>
 
 <p><strong>Software:</strong></p>
@@ -267,22 +280,26 @@
 <p><strong>Hardware:</strong></p>
 
 <p>All LEDs in WL2 (GPIO 8) illuminated simultaneously instead of alternating.</p>
+
 <h3 id="5-challenges">5. Challenges:</h3>
 
 <p>In WL2 subcircuit, a 556 timer was intended to generate flashing lights in patterns XOXO/OXOX alternately using four red LEDs, which were arranged in two parallel pairs across two separate branches. However, upon power-up, all LEDs illuminated simultaneously at an approximately equal brightness.</p>
 
 <p><strong>Investigation:</strong></p>
 
-<ol>
-  <li>Checked the values of resistors and capacitor connected to the 556 timer:
-  - For $R_A$ = $R_3$ and $R_B$ = $R_4$ + $R_5$, their values were $R_3$ = $R_4$ = $R_5$ = 10 kΩ, and $C_1$ = 10 μF, therefore period = 0.3465 s, which was sufficient to produce visible flashing.
-  - The 556 timer section was reviewed and confirmed that it was correctly connected to the positive and negative rails.
-  - The WL2 section was analysed, and it was identified that both parallel branches had an identical configuration. This was therefore the root cause.</li>
-</ol>
+<p>Checked the values of resistors and capacitor connected to the 556 timer:</p>
 
-<p><img src="556_timer.png" alt="556 timer" /></p>
+<ul>
+  <li>For $R_A$ = $R_3$ and $R_B$ = $R_4$ + $R_5$, their values were $R_3$ = $R_4$ = $R_5$ = 10 kΩ, and $C_1$ = 10 μF, therefore period = 0.3465 s, which was sufficient to produce visible flashing.</li>
+  <li>The 556 timer section was reviewed and confirmed that it was correctly connected to the positive and negative rails.</li>
+  <li>The WL2 section was analysed, and it was identified that both parallel branches had an identical configuration. This was therefore the root cause.
+ </li>
+</ul>
+<figure>
+  <img src="/svportfolio/assets/images/556_timer.png" alt="The configuration of the 556 timer ($U_3$) with resistors $R_3$, $R_4$, $R_5$ and capacitor $C_1$." style="width:100%; max-width:600px;" />
+  <figcaption>The configuration of the 556 timer ($U_3$) with resistors $R_3$, $R_4$, $R_5$ and capacitor $C_1$.</figcaption>
+</figure>
 
-<p style="font-size:0.9em; color:#4d4d4d; font-style:italic; text-align:center;">The configuration of the 556 timer ($U_3$) with resistors $R_3$, $R_4$, $R_5$ and capacitor $C_1$.</p>
 <p><strong>Root Cause:</strong></p>
 
 <p>Each branch of WL2 consisted of two identically configured “LED + resistor” strings connected in parallel. Each red LED was labelled with D- and each resistor (330 Ω) was labelled with R-.</p>
@@ -300,15 +317,20 @@
 
 <p>Since both branches shared the same nodes at both ends (between Output pin and GND), all the LEDs illuminated simultaneously.</p>
 
-<p><img src="" alt="555 timer" /></p>
-
-<p style="font-size:0.9em; color:#4d4d4d; font-style:italic; text-align:center;">Internal block diagram of a 555 timer (Timer A/B of the 556). Reproduced from Horowitz &amp; Hill, *The Art of Electronics*, 3rd ed., 2015, p. 428.</p>
+<figure>
+  <img src="/svportfolio/assets/images/555_timer_The_Art_of_Electronics.png" alt="Internal block diagram of a 555 timer (Timer A/B of the 556). Reproduced from Horowitz &amp; Hill, &lt;em&gt;The Art of Electronics&lt;/em&gt;, 3rd ed., 2015, p. 428." style="width:100%; max-width:600px;" />
+  <figcaption>Internal block diagram of a 555 timer (Timer A/B of the 556). Reproduced from Horowitz &amp; Hill, <em>The Art of Electronics</em>, 3rd ed., 2015, p. 428.</figcaption>
+</figure>
 
 <p><strong>Fix #1:</strong></p>
 
 <ol>
-  <li><strong>Swapped the positions of each of the LEDs and their adjacent resistors in branch 2.</strong></li>
-  <li><strong>Disconnected branch 2 to GND and reconnected to positive rail (5 V).</strong></li>
+  <li>
+    <p><strong>Swapped the positions of each of the LEDs and their adjacent resistors in branch 2.</strong></p>
+  </li>
+  <li>
+    <p><strong>Disconnected branch 2 to GND and reconnected to positive rail (5 V).</strong></p>
+  </li>
 </ol>
 
 <p>As the voltage in $C_1$ crossed 2/3 of 5 V, discharging started, Q went LOW, signaling the Output Driver to block the path between 5V and Output, and open the path between GND and Output. Current then flowed from the 5 V rail into Branch 2, turning on its LEDs, then continued into the Output pin to ground. Branch 1 was turned off since both sides equaled 0 V; thus, current = 0 A.</p>
@@ -323,9 +345,11 @@
 
 <p>This solved the light dimming issue by using the transistor’s threshold voltage (~2.0 V) to block the current path; therefore, when the node voltages in both sides were identical (5 V), the voltage difference equaled 0 V, current was 0 A. As a result, the $D_4$ and $D_6$ turned off.</p>
 
-<p><img src="WL.png" alt="WL2 subcircuit" /></p>
+<figure>
+  <img src="/svportfolio/assets/images/WL2.png" alt="Final configuration of the WL2 subcircuit with the NMOS transistor (BS170)." style="width:100%; max-width:600px;" />
+  <figcaption>Final configuration of the WL2 subcircuit with the NMOS transistor (BS170).</figcaption>
+</figure>
 
-<p style="font-size:0.9em; color:#4d4d4d; font-style:italic; text-align:center;">Final configuration of the WL2 subcircuit with the NMOS transistor (BS170).</p>
 <p><strong>Lesson:</strong></p>
 
 <ul>
@@ -389,7 +413,7 @@
 
 <p><strong>Tools</strong>: <a href="https://draw.io/">Draw.io</a> for circuit schematics, VSCode for development</p>
 
-<p><strong>Support</strong>: I would like to acknowledge the valuable contributions of my teammates, teaching assistants, and lecturers in this unit.</p>
+<p><strong>Support</strong>: My teammates, teaching assistants, and lecturers in this unit.</p>
 
 <hr />
 <p><strong>AI Acknowledgment:</strong> This portfolio entry was developed with the assistance of Gemini for structuring, grammar refinement, and clarity improvements. All technical content, circuit designs, code, and debugging insights are my own original work.</p>
@@ -397,7 +421,7 @@
       </section>
       <footer>
         <div style="position: relative; top: 30px;">
-          <p><small>Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+          <p><small>Based on the Minimal Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
         </div>
       </footer>
     </div>
