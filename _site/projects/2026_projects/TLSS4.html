@@ -22,7 +22,7 @@
 {"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-06-25T00:00:00+10:00","datePublished":"2026-06-25T00:00:00+10:00","description":"My Portfolio","headline":"Traffic Light System - Subsystem 4","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/svportfolio/projects/2026_projects/TLSS4.html"},"url":"http://localhost:4000/svportfolio/projects/2026_projects/TLSS4.html"}</script>
 <!-- End Jekyll SEO tag -->
 
-    <link rel="stylesheet" href="/svportfolio/assets/css/style.css?v=2083a4c91768a2178d7c80b19e790b261d39dead">
+    <link rel="stylesheet" href="/svportfolio/assets/css/style.css?v=78b49f1b2e7bff0d378966fcf72643c80b261139">
     <link rel="stylesheet" href="/svportfolio/assets/css/theme.css">
     <!--[if lt IE 9]>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -305,12 +305,8 @@
 <p>Each branch of WL2 consisted of two identically configured “LED + resistor” strings connected in parallel. Each red LED was labelled with D- and each resistor (330 Ω) was labelled with R-.</p>
 
 <ul>
-  <li>
-    <p>Branch 1: Output → ($D_4$ + $R_7$) // ($D_6$ + $R_9$) → GND</p>
-  </li>
-  <li>
-    <p>Branch 2: Output → ($D_3$ + $R_6$) // ($D_5$ + $R_8$) → GND</p>
-  </li>
+  <li>Branch 1: Output → ($D_4$ + $R_7$) // ($D_6$ + $R_9$) → GND</li>
+  <li>Branch 2: Output → ($D_3$ + $R_6$) // ($D_5$ + $R_8$) → GND</li>
 </ul>
 
 <p>During charging of the capacitor ($C_1$), the lower comparator (inside Timer B of 556 timer) output HIGH to input S of flip-flop, thus state of Q = HIGH, signaling to the Output Driver behind the Output pin to open the path for the current.</p>
@@ -320,12 +316,8 @@
 <p><strong>Fix #1:</strong></p>
 
 <ol>
-  <li>
-    <p><strong>Swapped the positions of each of the LEDs and their adjacent resistors in branch 2.</strong></p>
-  </li>
-  <li>
-    <p><strong>Disconnected branch 2 to GND and reconnected to positive rail (5 V).</strong></p>
-  </li>
+  <li><strong>Swapped the positions of each of the LEDs and their adjacent resistors in branch 2.</strong></li>
+  <li><strong>Disconnected branch 2 to GND and reconnected to positive rail (5 V).</strong></li>
 </ol>
 
 <p>As the voltage in $C_1$ crossed 2/3 of 5 V, discharging started, Q went LOW, signaling the Output Driver to block the path between 5V and Output, and open the path between GND and Output. Current then flowed from the 5 V rail into Branch 2, turning on its LEDs, then continued into the Output pin to ground. Branch 1 was turned off since both sides equaled 0 V; thus, current = 0 A.</p>

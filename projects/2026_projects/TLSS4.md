@@ -148,7 +148,6 @@ Checked the values of resistors and capacitor connected to the 556 timer:
 Each branch of WL2 consisted of two identically configured "LED + resistor" strings connected in parallel. Each red LED was labelled with D- and each resistor (330 Ω) was labelled with R-.
 
 - Branch 1: Output → ($D_4$ + $R_7$) // ($D_6$ + $R_9$) → GND
-
 - Branch 2: Output → ($D_3$ + $R_6$) // ($D_5$ + $R_8$) → GND
 
 During charging of the capacitor ($C_1$), the lower comparator (inside Timer B of 556 timer) output HIGH to input S of flip-flop, thus state of Q = HIGH, signaling to the Output Driver behind the Output pin to open the path for the current.
@@ -158,7 +157,6 @@ Since both branches shared the same nodes at both ends (between Output pin and G
 **Fix #1:**
 
 1. **Swapped the positions of each of the LEDs and their adjacent resistors in branch 2.**
-
 2. **Disconnected branch 2 to GND and reconnected to positive rail (5 V).**
 
 As the voltage in $C_1$ crossed 2/3 of 5 V, discharging started, Q went LOW, signaling the Output Driver to block the path between 5V and Output, and open the path between GND and Output. Current then flowed from the 5 V rail into Branch 2, turning on its LEDs, then continued into the Output pin to ground. Branch 1 was turned off since both sides equaled 0 V; thus, current = 0 A.
