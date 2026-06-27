@@ -225,3 +225,8 @@ This TLSP greatly inspired me to consider potential future simulations of smart 
 **Tools**: [Draw.io](https://draw.io/) for circuit schematics, VSCode for development
 
 **Support**: My teammates, teaching assistants, and lecturers in this unit.
+
+
+
+---
+**AI Acknowledgment:** This portfolio entry was developed with the assistance of Gemini for structuring, grammar refinement, and clarity improvements. All technical content, circuit designs, code, and debugging insights are my own original work.
